@@ -1,408 +1,408 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ale Sujal — Stocks & AI Researcher</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ale Sujal — Stocks & AI Researcher</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-  <meta name="description" content="Ale Sujal — Stocks & AI Research and Developer. Portfolio, projects, and contact.">
+    <meta name="description" content="Ale Sujal — Stocks & AI Research and Developer. Portfolio, projects, and contact.">
 
-  <style>
-    :root{
-      --bg: #081426;
-      --card: #0b1220;
-      --muted: #9aa4b2;
-      --accent: #7ae7c2;
-      --accent-2: #8bd7ff;
-      --glow-color: rgba(122, 231, 194, 0.5);
-      --glass: rgba(255,255,255,0.03);
-      --radius: 14px;
-      --max-width: 1100px;
-      --fw-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      --transition-speed: 0.3s;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: var(--fw-sans);
-      background: var(--bg);
-      background: linear-gradient(180deg,#041225 0%, #06142a 50%, #081426 100%);
-      color: #e6eef6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      line-height: 1.5;
-      padding-bottom: 40px;
-    }
-    /* ✨ New Cursor Spotlight Effect */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      pointer-events: none;
-      background: radial-gradient(
-        800px circle at var(--x) var(--y),
-        rgba(139, 215, 255, 0.06),
-        transparent 40%
-      );
-      z-index: 999;
-    }
+    <style>
+        :root{
+            --bg: #081426;
+            --card: #0b1220;
+            --muted: #9aa4b2;
+            --accent: #7ae7c2;
+            --accent-2: #8bd7ff;
+            --glow-color: rgba(122, 231, 194, 0.5);
+            --glass: rgba(255,255,255,0.03);
+            --radius: 14px;
+            --max-width: 1100px;
+            --fw-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            --transition-speed: 0.3s;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: var(--fw-sans);
+            background: var(--bg);
+            background: linear-gradient(180deg,#041225 0%, #06142a 50%, #081426 100%);
+            color: #e6eef6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+        /* ✨ New Cursor Spotlight Effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            background: radial-gradient(
+                800px circle at var(--x) var(--y),
+                rgba(139, 215, 255, 0.06),
+                transparent 40%
+            );
+            z-index: 999;
+        }
 
-    a { color: var(--accent-2); text-decoration: none; }
-    img { max-width:100%; display:block; }
+        a { color: var(--accent-2); text-decoration: none; }
+        img { max-width:100%; display:block; }
 
-    .wrap {
-      max-width: var(--max-width);
-      margin: 28px auto;
-      padding: 0 22px;
-    }
-    
-    /* ✨ Sticky Header */
-    header {
-      display:flex;
-      gap:16px;
-      align-items:center;
-      justify-content:space-between;
-      padding: 12px 18px;
-      border-radius: 12px;
-      background: rgba(11, 18, 32, 0.5);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255,255,255,0.03);
-      position: sticky;
-      top: 16px;
-      z-index: 100;
-      transition: background-color var(--transition-speed) ease;
-    }
-    .brand { display:flex; gap:12px; align-items:center; }
-    .logo {
-      width:52px; height:52px; border-radius:10px;
-      background: linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:grid; place-items:center; font-weight:700; color:#042028;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.45), inset 0 -6px 18px rgba(255,255,255,0.03);
-      flex-shrink:0;
-    }
-    nav ul { margin:0; padding:0; display:flex; gap:10px; list-style:none; align-items:center; }
-    nav a { padding:8px 10px; border-radius:8px; color:var(--muted); font-weight:600; font-size:14px; transition: color var(--transition-speed) ease, background-color var(--transition-speed) ease; }
-    nav a:hover { color: #fff; background: rgba(255,255,255,0.05); }
-    nav a.active { color: var(--accent); } /* Active link highlighting */
+        .wrap {
+            max-width: var(--max-width);
+            margin: 28px auto;
+            padding: 0 22px;
+        }
 
-    .hero {
-      display:flex; gap:24px; align-items:center; margin-top:20px; padding:32px;
-      border-radius: var(--radius);
-      background: transparent;
-    }
-    .hero-left { flex:1 1 420px; }
-    .hero h1 { margin:0 0 8px 0; font-size:32px; line-height:1.05; }
-    /* ✨ Animated Gradient Text */
-    .animated-gradient {
-      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent));
-      background-size: 200% auto;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient-flow 5s linear infinite;
-    }
-    @keyframes gradient-flow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        /* ✨ Sticky Header */
+        header {
+            display:flex;
+            gap:16px;
+            align-items:center;
+            justify-content:space-between;
+            padding: 12px 18px;
+            border-radius: 12px;
+            background: rgba(11, 18, 32, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.03);
+            position: sticky;
+            top: 16px;
+            z-index: 100;
+            transition: background-color var(--transition-speed) ease;
+        }
+        .brand { display:flex; gap:12px; align-items:center; }
+        .logo {
+            width:52px; height:52px; border-radius:10px;
+            background: linear-gradient(135deg,var(--accent),var(--accent-2));
+            display:grid; place-items:center; font-weight:700; color:#042028;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.45), inset 0 -6px 18px rgba(255,255,255,0.03);
+            flex-shrink:0;
+        }
+        nav ul { margin:0; padding:0; display:flex; gap:10px; list-style:none; align-items:center; }
+        nav a { padding:8px 10px; border-radius:8px; color:var(--muted); font-weight:600; font-size:14px; transition: color var(--transition-speed) ease, background-color var(--transition-speed) ease; }
+        nav a:hover { color: #fff; background: rgba(255,255,255,0.05); }
+        nav a.active { color: var(--accent); } /* Active link highlighting */
 
-    .lead { color:var(--muted); margin:0 0 16px 0; font-size:15px; max-width:70ch; }
-    .cta-row{ display:flex; gap:12px; align-items:center; margin-top:12px; }
-    .btn{
-      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px;
-      font-weight:600; cursor:pointer; border:1px solid rgba(255,255,255,0.03);
-      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .btn-primary{
-      background: linear-gradient(90deg,var(--accent),var(--accent-2));
-      color:#012226; box-shadow: 0 8px 30px rgba(122,231,194,0.06);
-    }
-    .btn:hover{ transform:translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-    .hero-right { width:220px; min-width:200px; display:flex; align-items:center; justify-content:center; }
-    .profile-card { width:200px; border-radius:14px; padding:14px; text-align:center; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow: 0 12px 30px rgba(2,6,23,0.6); }
-    .profile-photo { width:84px; height:84px; border-radius:50%; margin:0 auto 10px; background: linear-gradient(135deg,#fff 0%, rgba(255,255,255,0.06) 100%); display:grid; place-items:center; color:#012226; font-weight:700; font-size:28px; }
+        .hero {
+            display:flex; gap:24px; align-items:center; margin-top:20px; padding:32px;
+            border-radius: var(--radius);
+            background: transparent;
+        }
+        .hero-left { flex:1 1 420px; }
+        .hero h1 { margin:0 0 8px 0; font-size:32px; line-height:1.05; }
+        /* ✨ Animated Gradient Text */
+        .animated-gradient {
+            background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent));
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-flow 5s linear infinite;
+        }
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    section { margin-top:24px; padding:20px 0; }
-    .section-header{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:14px; }
-    .section-header h2{ margin:0; font-size:20px; }
-    .card{ padding:18px; border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border:1px solid rgba(255,255,255,0.02); }
+        .lead { color:var(--muted); margin:0 0 16px 0; font-size:15px; max-width:70ch; }
+        .cta-row{ display:flex; gap:12px; align-items:center; margin-top:12px; }
+        .btn{
+            display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px;
+            font-weight:600; cursor:pointer; border:1px solid rgba(255,255,255,0.03);
+            background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+            transition: transform .18s ease, box-shadow .18s ease;
+        }
+        .btn-primary{
+            background: linear-gradient(90deg,var(--accent),var(--accent-2));
+            color:#012226; box-shadow: 0 8px 30px rgba(122,231,194,0.06);
+        }
+        .btn:hover{ transform:translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .hero-right { width:220px; min-width:200px; display:flex; align-items:center; justify-content:center; }
+        .profile-card { width:200px; border-radius:14px; padding:14px; text-align:center; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow: 0 12px 30px rgba(2,6,23,0.6); }
+        .profile-photo { width:84px; height:84px; border-radius:50%; margin:0 auto 10px; background: linear-gradient(135deg,#fff 0%, rgba(255,255,255,0.06) 100%); display:grid; place-items:center; color:#012226; font-weight:700; font-size:28px; }
 
-    .about p{ color:var(--muted); margin:0; font-size:15px; }
+        section { margin-top:24px; padding:20px 0; }
+        .section-header{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:14px; }
+        .section-header h2{ margin:0; font-size:20px; }
+        .card{ padding:18px; border-radius:12px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border:1px solid rgba(255,255,255,0.02); }
 
-    /* ✨ Skills section with Icons */
-    .skills-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
-    .skill{ display:flex; gap:12px; align-items:center; padding:12px; border-radius:10px; background:var(--glass); border:1px solid rgba(255,255,255,0.02); transition: background-color var(--transition-speed) ease; }
-    .skill:hover { background-color: rgba(255,255,255,0.03); }
-    .skill .icon { width:44px; height:44px; border-radius:8px; display:grid; place-items:center; background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); flex-shrink: 0;}
-    .skill .icon svg { width: 24px; height: 24px; color: var(--muted); }
+        .about p{ color:var(--muted); margin:0; font-size:15px; }
 
-    /* ✨ Projects section with Glowing Border */
-    .projects-grid{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); }
-    .project{ padding:18px; border-radius:12px; background: var(--card); border:1px solid rgba(255,255,255,0.04); transition: transform .18s ease, box-shadow .18s ease; position: relative; overflow: hidden; }
-    .project::before {
-        content: "";
-        position: absolute;
-        top: 0; right: 0; bottom: 0; left: 0;
-        border-radius: inherit;
-        border: 1px solid transparent;
-        background: radial-gradient(400px at var(--x-card) var(--y-card), var(--glow-color), transparent 80%) border-box;
-        -webkit-mask:
-            linear-gradient(#fff 0 0) content-box,
-            linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        opacity: 0;
-        transition: opacity var(--transition-speed) ease;
-    }
-    .project:hover::before { opacity: 1; }
-    .project:hover{ transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,0.6); }
-    .project h3{ margin:0 0 8px 0; font-size:16px; color: #fff; }
-    .project p{ margin:0 0 12px 0; color:var(--muted); font-size:14px; }
-    .project-footer{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top: auto; padding-top: 10px; }
-    
-    /* ADDED STYLES FOR CLICKABLE PROJECT CARDS */
-    .project-link {
-        display: block;
-        text-decoration: none;
-        color: inherit;
-    }
-    .project-link .project-footer > span {
-        color: var(--accent-2);
-        font-weight: 600;
-    }
+        /* ✨ Skills section with Icons */
+        .skills-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+        .skill{ display:flex; gap:12px; align-items:center; padding:12px; border-radius:10px; background:var(--glass); border:1px solid rgba(255,255,255,0.02); transition: background-color var(--transition-speed) ease; }
+        .skill:hover { background-color: rgba(255,255,255,0.03); }
+        .skill .icon { width:44px; height:44px; border-radius:8px; display:grid; place-items:center; background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); flex-shrink: 0;}
+        .skill .icon svg { width: 24px; height: 24px; color: var(--muted); }
 
-    .contact-grid{ display:grid; gap:12px; grid-template-columns: 1fr 340px; }
-    .contact-list a{ display:flex; gap:12px; align-items:center; padding:12px; border-radius:10px; color:var(--muted); background:var(--glass); transition: background-color var(--transition-speed) ease; }
-    .contact-list a:hover { background-color: rgba(255,255,255,0.04); color: #fff; }
-    .contact-form{ padding:18px; border-radius:10px; border:1px solid rgba(255,255,255,0.02); }
-    .form-row{ display: flex; gap: 8px; margin-bottom: 10px; }
-    .form-row input, .form-row textarea { width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:var(--glass); color:inherit; font-size:14px; transition: border-color var(--transition-speed) ease; }
-    .form-row input:focus, .form-row textarea:focus { border-color: var(--accent); outline: none; background-color: transparent; }
-    .form-row textarea{ min-height:110px; resize:vertical; }
+        /* ✨ Projects section with Glowing Border */
+        .projects-grid{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); }
+        .project{ padding:18px; border-radius:12px; background: var(--card); border:1px solid rgba(255,255,255,0.04); transition: transform .18s ease, box-shadow .18s ease; position: relative; overflow: hidden; }
+        .project::before {
+                content: "";
+                position: absolute;
+                top: 0; right: 0; bottom: 0; left: 0;
+                border-radius: inherit;
+                border: 1px solid transparent;
+                background: radial-gradient(400px at var(--x-card) var(--y-card), var(--glow-color), transparent 80%) border-box;
+                -webkit-mask:
+                        linear-gradient(#fff 0 0) content-box,
+                        linear-gradient(#fff 0 0);
+                -webkit-mask-composite: xor;
+                mask-composite: exclude;
+                opacity: 0;
+                transition: opacity var(--transition-speed) ease;
+        }
+        .project:hover::before { opacity: 1; }
+        .project:hover{ transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,0.6); }
+        .project h3{ margin:0 0 8px 0; font-size:16px; color: #fff; }
+        .project p{ margin:0 0 12px 0; color:var(--muted); font-size:14px; }
+        .project-footer{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top: auto; padding-top: 10px; }
 
-    footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; padding: 20px; }
-    
-    /* ✨ Scroll Animation */
-    .reveal {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
+        /* ADDED STYLES FOR CLICKABLE PROJECT CARDS */
+        .project-link {
+                display: block;
+                text-decoration: none;
+                color: inherit;
+        }
+        .project-link .project-footer > span {
+                color: var(--accent-2);
+                font-weight: 600;
+        }
 
-    @media (max-width:880px){
-      .hero{ flex-direction:column; align-items:flex-start; text-align: center; }
-      .hero-left { text-align: left; }
-      .cta-row { justify-content: flex-start; }
-      .hero-right{ width:100%; order: -1; margin-bottom: 24px; }
-      .contact-grid{ grid-template-columns: 1fr; }
-      header{ flex-direction:column; align-items:stretch; gap:12px; position: static; }
-      nav ul{ flex-wrap:wrap; justify-content: center; }
-    }
-  </style>
+        .contact-grid{ display:grid; gap:12px; grid-template-columns: 1fr 340px; }
+        .contact-list a{ display:flex; gap:12px; align-items:center; padding:12px; border-radius:10px; color:var(--muted); background:var(--glass); transition: background-color var(--transition-speed) ease; }
+        .contact-list a:hover { background-color: rgba(255,255,255,0.04); color: #fff; }
+        .contact-form{ padding:18px; border-radius:10px; border:1px solid rgba(255,255,255,0.02); }
+        .form-row{ display: flex; gap: 8px; margin-bottom: 10px; }
+        .form-row input, .form-row textarea { width:100%; padding:10px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:var(--glass); color:inherit; font-size:14px; transition: border-color var(--transition-speed) ease; }
+        .form-row input:focus, .form-row textarea:focus { border-color: var(--accent); outline: none; background-color: transparent; }
+        .form-row textarea{ min-height:110px; resize:vertical; }
+
+        footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; padding: 20px; }
+
+        /* ✨ Scroll Animation */
+        .reveal {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+                opacity: 1;
+                transform: translateY(0);
+        }
+
+        @media (max-width:880px){
+            .hero{ flex-direction:column; align-items:flex-start; text-align: center; }
+            .hero-left { text-align: left; }
+            .cta-row { justify-content: flex-start; }
+            .hero-right{ width:100%; order: -1; margin-bottom: 24px; }
+            .contact-grid{ grid-template-columns: 1fr; }
+            header{ flex-direction:column; align-items:stretch; gap:12px; position: static; }
+            nav ul{ flex-wrap:wrap; justify-content: center; }
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <header aria-label="Main header">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">AS</div>
-        <div>
-          <div style="font-weight:700">Ale Sujal</div>
-          <div style="font-size:13px;color:var(--muted)">Stocks & AI Research and Developer</div>
-        </div>
-      </div>
-
-      <nav aria-label="Primary navigation">
-        <ul>
-          <li><a class="nav-link" href="#home">Home</a></li>
-          <li><a class="nav-link" href="#about">About</a></li>
-          <li><a class="nav-link" href="#skills">Skills</a></li>
-          <li><a class="nav-link" href="#projects">Projects</a></li>
-          <li><a class="nav-link" href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main>
-      <section id="home" class="hero reveal" aria-labelledby="hero-heading">
-        <div class="hero-left">
-          <h1 id="hero-heading">Hi — I'm <span class="animated-gradient">Ale Sujal</span></h1>
-          <p class="lead">I research stocks and build AI tools that help analyze market data. My focus is applying machine learning to real-world trading and research workflows — clean code, reproducible experiments, and practical models.</p>
-
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#projects" title="See projects">View Projects</a>
-            <a class="btn" href="#contact" title="Contact me">Get in touch</a>
-          </div>
-
-          <div style="margin-top:14px; color:var(--muted); font-size:13px;">
-            <strong>Location:</strong> Busan, South Korea • <strong>Open to collaborations & internships</strong>
-          </div>
-        </div>
-
-        <div class="hero-right">
-          <div class="profile-card">
-            <div class="profile-photo" aria-hidden="true">AS</div>
-            <div style="font-weight:700">Ale Sujal</div>
-            <div style="font-size:13px;color:var(--muted)">Stocks & AI Research</div>
-            <div style="margin-top:8px;">
-              <a href="https://github.com/sujalale10" target="_blank" rel="noopener" style="font-weight:700; font-size:13px; color:var(--accent-2)">@sujalale10</a>
+    <div class="wrap">
+        <header aria-label="Main header">
+            <div class="brand">
+                <div class="logo" aria-hidden="true">AS</div>
+                <div>
+                    <div style="font-weight:700">Ale Sujal</div>
+                    <div style="font-size:13px;color:var(--muted)">Stocks & AI Research and Developer</div>
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section id="about" class="reveal">
-        <div class="section-header">
-          <h2>About me</h2>
-        </div>
-        <div class="card about">
-          <p>
-            With a vision of developing my own business, I combine stock market research with machine learning to build tools that surface actionable insights. I enjoy data engineering, model prototyping, and building reproducible pipelines. Currently building small projects that analyze market behaviour and automate parts of the research workflow.
-          </p>
-        </div>
-      </section>
+            <nav aria-label="Primary navigation">
+                <ul>
+                    <li><a class="nav-link" href="#home">Home</a></li>
+                    <li><a class="nav-link" href="#about">About</a></li>
+                    <li><a class="nav-link" href="#skills">Skills</a></li>
+                    <li><a class="nav-link" href="#projects">Projects</a></li>
+                    <li><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
 
-      <section id="skills" class="reveal">
-        <div class="section-header">
-          <h2>Skills</h2>
-        </div>
-        <div class="skills-grid">
-          <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V8.25a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 8.25v7.5A2.25 2.25 0 006.75 18z" /></svg></div><div><div style="font-weight:700">Artificial Intelligence</div><div style="color:var(--muted); font-size:13px">Modeling & experimentation</div></div></div>
-          <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg></div><div><div style="font-weight:700">Python</div><div style="color:var(--muted); font-size:13px">Data analysis & scripting</div></div></div>
-          <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg></div><div><div style="font-weight:700">Stock Analysis</div><div style="color:var(--muted); font-size:13px">Indicators, backtesting</div></div></div>
-          <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-.07.002z" /></svg></div><div><div style="font-weight:700">Machine Learning</div><div style="color:var(--muted); font-size:13px">Supervised & time-series</div></div></div>
-          <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375" /></svg></div><div><div style="font-weight:700">Data Science</div><div style="color:var(--muted); font-size:13px">ETL & visualization</div></div></div>
-          <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg></div><div><div style="font-weight:700">Git & GitHub</div><div style="color:var(--muted); font-size:13px">Version control</div></div></div>
-        </div>
-      </section>
+        <main>
+            <section id="home" class="hero reveal" aria-labelledby="hero-heading">
+                <div class="hero-left">
+                    <h1 id="hero-heading">Hi — I'm <span class="animated-gradient">Ale Sujal</span></h1>
+                    <p class="lead">I research stocks and build AI tools that help analyze market data. My focus is applying machine learning to real-world trading and research workflows — clean code, reproducible experiments, and practical models.</p>
 
-      <section id="projects" class="reveal">
-        <div class="section-header">
-          <h2>Projects</h2>
-        </div>
-        <div class="projects-grid">
-          <article class="project card reveal" aria-labelledby="p1">
-            <h3 id="p1">MarketPulse — Indicator Suite</h3>
-            <p>A Python toolkit that computes short-term technical indicators and visualizes signals for quick research. Includes backtest examples and data pipeline.</p>
-            <div class="project-footer">
-              <a target="_blank" rel="noopener" href="https://github.com/sujalale10/marketpulse">View on GitHub →</a>
-              <div style="color:var(--muted); font-size:13px">Python • Backtesting</div>
-            </div>
-          </article>
+                    <div class="cta-row">
+                        <a class="btn btn-primary" href="#projects" title="See projects">View Projects</a>
+                        <a class="btn" href="#contact" title="Contact me">Get in touch</a>
+                    </div>
 
-          <article class="project card reveal" aria-labelledby="p2">
-            <h3 id="p2">AlphaML — Time-series ML</h3>
-            <p>Notebook-based experiments applying ML models to stock time-series, focusing on feature engineering, model comparison, and reproducible training.</p>
-            <div class="project-footer">
-              <a target="_blank" rel="noopener" href="https://github.com/sujalale10/alphaml">View on GitHub →</a>
-              <div style="color:var(--muted); font-size:13px">ML • Time-series</div>
-            </div>
-          </article>
-          
-          <a href="https://sujalale10.github.io/Ale-Sujal/improvedgame.html" target="_blank" rel="noopener" class="project-link">
-            <article class="project card reveal" aria-labelledby="p4">
-              <h3 id="p4">Tetris Game — Improved Version</h3>
-              <p>A polished, production-quality Tetris clone with a retro Game Boy aesthetic. Features SRS rotation, competitive input, and full mobile support.</p>
-              <div class="project-footer">
-                <span>Play the Game →</span>
-                <div style="color:var(--muted); font-size:13px">JavaScript • HTML • CSS</div>
-              </div>
-            </article>
-          </a>
+                    <div style="margin-top:14px; color:var(--muted); font-size:13px;">
+                        <strong>Location:</strong> Busan, South Korea • <strong>Open to collaborations & internships</strong>
+                    </div>
+                </div>
 
-          <a href="https://sujalale10.github.io/Ale-Sujal/sujalgame.html" target="_blank" rel="noopener" class="project-link">
-            <article class="project card reveal" aria-labelledby="p5">
-              <h3 id="p5">Classic Tetris — Old Version</h3>
-              <p>My original JavaScript-based Tetris game. A fun early project that served as the foundation for the improved version.</p>
-              <div class="project-footer">
-                <span>Play the Game →</span>
-                <div style="color:var(--muted); font-size:13px">JavaScript • HTML</div>
-              </div>
-            </article>
-          </a>
-        </div>
-      </section>
+                <div class="hero-right">
+                    <div class="profile-card">
+                        <div class="profile-photo" aria-hidden="true">AS</div>
+                        <div style="font-weight:700">Ale Sujal</div>
+                        <div style="font-size:13px;color:var(--muted)">Stocks & AI Research</div>
+                        <div style="margin-top:8px;">
+                            <a href="https://github.com/sujalale10" target="_blank" rel="noopener" style="font-weight:700; font-size:13px; color:var(--accent-2)">@sujalale10</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-      <section id="contact" class="reveal">
-        <div class="section-header">
-          <h2>Contact</h2>
-        </div>
-        <div class="contact-grid">
-          <div class="contact-list">
-            <a href="mailto:alesujal09@gmail.com" class="reveal">📧 alesujal09@gmail.com</a>
-            <a href="https://github.com/sujalale10" target="_blank" rel="noopener" class="reveal">💻 github.com/sujalale10</a>
-          </div>
-          <form class="contact-form reveal" onsubmit="alert('This demo form does not send. Please use email!'); return false;">
-            <div class="form-row"><input type="text" placeholder="Name" required></div>
-            <div class="form-row"><input type="email" placeholder="Email" required></div>
-            <div class="form-row"><textarea placeholder="Message" required></textarea></div>
-            <button class="btn btn-primary" type="submit">Send message</button>
-          </form>
-        </div>
-      </section>
-    </main>
-    
-    <footer class="reveal">
-      © 2025 Ale Sujal. Enhanced with AI ✦ Hosted on GitHub Pages.
-    </footer>
-  </div>
+            <section id="about" class="reveal">
+                <div class="section-header">
+                    <h2>About me</h2>
+                </div>
+                <div class="card about">
+                    <p>
+                        With a vision of developing my own business, I combine stock market research with machine learning to build tools that surface actionable insights. I enjoy data engineering, model prototyping, and building reproducible pipelines. Currently building small projects that analyze market behaviour and automate parts of the research workflow.
+                    </p>
+                </div>
+            </section>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
+            <section id="skills" class="reveal">
+                <div class="section-header">
+                    <h2>Skills</h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V8.25a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 8.25v7.5A2.25 2.25 0 006.75 18z" /></svg></div><div><div style="font-weight:700">Artificial Intelligence</div><div style="color:var(--muted); font-size:13px">Modeling & experimentation</div></div></div>
+                    <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" /></svg></div><div><div style="font-weight:700">Python</div><div style="color:var(--muted); font-size:13px">Data analysis & scripting</div></div></div>
+                    <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg></div><div><div style="font-weight:700">Stock Analysis</div><div style="color:var(--muted); font-size:13px">Indicators, backtesting</div></div></div>
+                    <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0l-.07.002z" /></svg></div><div><div style="font-weight:700">Machine Learning</div><div style="color:var(--muted); font-size:13px">Supervised & time-series</div></div></div>
+                    <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375" /></svg></div><div><div style="font-weight:700">Data Science</div><div style="color:var(--muted); font-size:13px">ETL & visualization</div></div></div>
+                    <div class="skill reveal"><div class="icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg></div><div><div style="font-weight:700">Git & GitHub</div><div style="color:var(--muted); font-size:13px">Version control</div></div></div>
+                </div>
+            </section>
 
-      // ✨ Cursor Spotlight Effect
-      const body = document.body;
-      body.addEventListener('mousemove', e => {
-        body.style.setProperty('--x', e.clientX + 'px');
-        body.style.setProperty('--y', e.clientY + 'px');
-      });
-      
-      // ✨ Project Card Hover Effect
-      document.querySelectorAll('.project').forEach(card => {
-        card.addEventListener('mousemove', e => {
-          const rect = card.getBoundingClientRect();
-          card.style.setProperty('--x-card', e.clientX - rect.left + 'px');
-          card.style.setProperty('--y-card', e.clientY - rect.top + 'px');
-        });
-      });
+            <section id="projects" class="reveal">
+                <div class="section-header">
+                    <h2>Projects</h2>
+                </div>
+                <div class="projects-grid">
+                    <article class="project card reveal" aria-labelledby="p1">
+                        <h3 id="p1">MarketPulse — Indicator Suite</h3>
+                        <p>A Python toolkit that computes short-term technical indicators and visualizes signals for quick research. Includes backtest examples and data pipeline.</p>
+                        <div class="project-footer">
+                            <a target="_blank" rel="noopener" href="https://github.com/sujalale10/marketpulse">View on GitHub →</a>
+                            <div style="color:var(--muted); font-size:13px">Python • Backtesting</div>
+                        </div>
+                    </article>
 
-      // ✨ Scroll Animations
-      const revealElements = document.querySelectorAll('.reveal');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      }, { threshold: 0.1 });
-      revealElements.forEach(el => observer.observe(el));
+                    <article class="project card reveal" aria-labelledby="p2">
+                        <h3 id="p2">AlphaML — Time-series ML</h3>
+                        <p>Notebook-based experiments applying ML models to stock time-series, focusing on feature engineering, model comparison, and reproducible training.</p>
+                        <div class="project-footer">
+                            <a target="_blank" rel="noopener" href="https://github.com/sujalale10/alphaml">View on GitHub →</a>
+                            <div style="color:var(--muted); font-size:13px">ML • Time-series</div>
+                        </div>
+                    </article>
 
-      // ✨ Active Nav Link on Scroll
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('nav a');
-      const navObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            navLinks.forEach(link => {
-              link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
+                    <a href="https://sujalale10.github.io/Ale-Sujal/improvedgame.html" target="_blank" rel="noopener" class="project-link">
+                        <article class="project card reveal" aria-labelledby="p4">
+                            <h3 id="p4">Tetris Game — Improved Version</h3>
+                            <p>A polished, production-quality Tetris clone with a retro Game Boy aesthetic. Features SRS rotation, competitive input, and full mobile support.</p>
+                            <div class="project-footer">
+                                <span>Play the Game →</span>
+                                <div style="color:var(--muted); font-size:13px">JavaScript • HTML • CSS</div>
+                            </div>
+                        </article>
+                    </a>
+
+                    <a href="https://sujalale10.github.io/Ale-Sujal/sujalgame.html" target="_blank" rel="noopener" class="project-link">
+                        <article class="project card reveal" aria-labelledby="p5">
+                            <h3 id="p5">Classic Tetris — Old Version</h3>
+                            <p>My original JavaScript-based Tetris game. A fun early project that served as the foundation for the improved version.</p>
+                            <div class="project-footer">
+                                <span>Play the Game →</span>
+                                <div style="color:var(--muted); font-size:13px">JavaScript • HTML</div>
+                            </div>
+                        </article>
+                    </a>
+                </div>
+            </section>
+
+            <section id="contact" class="reveal">
+                <div class="section-header">
+                    <h2>Contact</h2>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-list">
+                        <a href="mailto:alesujal09@gmail.com" class="reveal">📧 alesujal09@gmail.com</a>
+                        <a href="https://github.com/sujalale10" target="_blank" rel="noopener" class="reveal">💻 github.com/sujalale10</a>
+                    </div>
+                    <form class="contact-form reveal" onsubmit="alert('This demo form does not send. Please use email!'); return false;">
+                        <div class="form-row"><input type="text" placeholder="Name" required></div>
+                        <div class="form-row"><input type="email" placeholder="Email" required></div>
+                        <div class="form-row"><textarea placeholder="Message" required></textarea></div>
+                        <button class="btn btn-primary" type="submit">Send message</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="reveal">
+            © 2025 Ale Sujal. Enhanced with AI ✦ Hosted on GitHub Pages.
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // ✨ Cursor Spotlight Effect
+            const body = document.body;
+            body.addEventListener('mousemove', e => {
+                body.style.setProperty('--x', e.clientX + 'px');
+                body.style.setProperty('--y', e.clientY + 'px');
             });
-          }
-        });
-      }, { rootMargin: '-50% 0px -50% 0px' });
-      sections.forEach(sec => navObserver.observe(sec));
 
-    });
-  </script>
+            // ✨ Project Card Hover Effect
+            document.querySelectorAll('.project').forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--x-card', e.clientX - rect.left + 'px');
+                    card.style.setProperty('--y-card', e.clientY - rect.top + 'px');
+                });
+            });
+
+            // ✨ Scroll Animations
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealElements.forEach(el => observer.observe(el));
+
+            // ✨ Active Nav Link on Scroll
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a');
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.toggle('active', link.getAttribute('href').substring(1) === entry.target.id);
+                        });
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px' });
+            sections.forEach(sec => navObserver.observe(sec));
+
+        });
+    </script>
 </body>
 </html>
