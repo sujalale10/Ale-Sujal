@@ -167,6 +167,17 @@
     .project h3{ margin:0 0 8px 0; font-size:16px; color: #fff; }
     .project p{ margin:0 0 12px 0; color:var(--muted); font-size:14px; }
     .project-footer{ display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top: auto; padding-top: 10px; }
+    
+    /* ADDED STYLES FOR CLICKABLE PROJECT CARDS */
+    .project-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+    }
+    .project-link .project-footer > span {
+        color: var(--accent-2);
+        font-weight: 600;
+    }
 
     .contact-grid{ display:grid; gap:12px; grid-template-columns: 1fr 340px; }
     .contact-list a{ display:flex; gap:12px; align-items:center; padding:12px; border-radius:10px; color:var(--muted); background:var(--glass); transition: background-color var(--transition-speed) ease; }
@@ -299,23 +310,27 @@
             </div>
           </article>
           
-          <article class="project card reveal" aria-labelledby="p4">
-            <h3 id="p4">Tetris Game — Improved Version</h3>
-            <p>A polished, production-quality Tetris clone with a retro Game Boy aesthetic. Features SRS rotation, competitive input, and full mobile support.</p>
-            <div class="project-footer">
-              <a target="_blank" rel="noopener" href="https://sujalale10.github.io/Ale-Sujal/improvedgame.html">Play the Game →</a>
-              <div style="color:var(--muted); font-size:13px">JavaScript • HTML • CSS</div>
-            </div>
-          </article>
+          <a href="https://sujalale10.github.io/Ale-Sujal/improvedgame.html" target="_blank" rel="noopener" class="project-link">
+            <article class="project card reveal" aria-labelledby="p4">
+              <h3 id="p4">Tetris Game — Improved Version</h3>
+              <p>A polished, production-quality Tetris clone with a retro Game Boy aesthetic. Features SRS rotation, competitive input, and full mobile support.</p>
+              <div class="project-footer">
+                <span>Play the Game →</span>
+                <div style="color:var(--muted); font-size:13px">JavaScript • HTML • CSS</div>
+              </div>
+            </article>
+          </a>
 
-          <article class="project card reveal" aria-labelledby="p5">
-            <h3 id="p5">Classic Tetris — Old Version</h3>
-            <p>My original JavaScript-based Tetris game. A fun early project that served as the foundation for the improved version.</p>
-            <div class="project-footer">
-              <a target="_blank" rel="noopener" href="https://sujalale10.github.io/Ale-Sujal/sujalgame.html">Play the Game →</a>
-              <div style="color:var(--muted); font-size:13px">JavaScript • HTML</div>
-            </div>
-          </article>
+          <a href="https://sujalale10.github.io/Ale-Sujal/sujalgame.html" target="_blank" rel="noopener" class="project-link">
+            <article class="project card reveal" aria-labelledby="p5">
+              <h3 id="p5">Classic Tetris — Old Version</h3>
+              <p>My original JavaScript-based Tetris game. A fun early project that served as the foundation for the improved version.</p>
+              <div class="project-footer">
+                <span>Play the Game →</span>
+                <div style="color:var(--muted); font-size:13px">JavaScript • HTML</div>
+              </div>
+            </article>
+          </a>
         </div>
       </section>
 
