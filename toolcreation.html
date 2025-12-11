@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Anomaly Detection Tool</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --primary: #2563eb;
+            --danger: #dc2626;
+            --success: #16a34a;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --text: #1e293b;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header h1 { margin-bottom: 5px; color: var(--primary); }
+        header p { color: var(--text-light); }
+
+        /* Card Layout */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        h2 { font-size: 1.25rem; margin-top: 0; border-bottom: 2px solid var(--bg); padding-bottom: 10px; }
+        
+        /* Controls Grid */
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            align-items: start;
+        }
+
+        label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
+        input[type="file"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn:hover { background-color: #1d4ed8; }
+        .btn-outline { background: transparent; border: 1px solid var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: #eff6ff; }
+
+        /* Educational Tooltips/Info */
+        .info-box {
+            background-color: #eff6ff;
+            border-left: 4px solid var(--primary);
+            padding: 10px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        /* Summary Panel */
+        .summary-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .stat-item {
+            flex: 1;
+            background: #f1f5f9;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stat-value { font-size: 1.5rem; font-weight: bold; color: var(--primary); }
+        .stat-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto;
+            max-height: 500px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        th { background-color: #f8fafc; position: sticky; top: 0; z-index: 10; }
+        
+        /* Anomaly Highlighting */
+        tr.anomaly-row {
+            background-color: #fef2f2; /* Light Red */
+        }
+        tr.anomaly-row:hover {
+            background-color: #fee2e2;
+        }
+        .anomaly-badge {
+            background-color: var(--danger);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+        
+        /* Tooltip in cells */
+        .cell-anomaly {
+            color: var(--danger);
+            font-weight: bold;
+            cursor: help;
+            text-decoration: underline dotted;
+        }
+
+        /* Visualization */
+        #chartContainer {
+            height: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Anomaly Detector Pro</h1>
+        <p>Detect statistical outliers in your CSV data using Z-Score analysis.</p>
+    </header>
+
+    <div class="card">
+        <h2>1. Upload & Settings</h2>
+        <div class="controls-grid">
+            <div>
+                <label for="csvFile">Upload CSV File</label>
+                <input type="file" id="csvFile" accept=".csv">
+                <div class="info-box">
+                    Files are processed locally in your browser. No data is sent to a server.
+                </div>
+            </div>
+
+            <div>
+                <label for="threshold">Sensitivity Threshold (k)</label>
+                <input type="number" id="threshold" value="3" step="0.1" min="1">
+                
+                <label for="method" style="margin-top: 10px;">Detection Method</label>
+                <select id="method">
+                    <option value="zscore">Z-Score Method (|z| > k)</option>
+                    <option value="stddev">Std Dev Range (Mean ± k*σ)</option>
+                </select>
+                <div class="info-box">
+                    <strong>Z-Score:</strong> Measures how many standard deviations a data point is from the mean. Typically, a Z-score > 3 is considered an anomaly.
+                </div>
+            </div>
+
+            <div style="align-self: end;">
+                <button class="btn" id="analyzeBtn" disabled>Re-Analyze Data</button>
+                <div style="margin-top: 10px;">
+                    <label>View Mode:</label>
+                    <select id="filterMode">
+                        <option value="all">Show All Rows</option>
+                        <option value="anomalies">Show Only Anomalies</option>
+                        <option value="normal">Show Only Normal</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="summaryPanel" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h2>2. Analysis Summary</h2>
+            <button class="btn btn-outline" id="exportBtn">Export Anomalies (CSV)</button>
+        </div>
+        
+        <div class="summary-stats">
+            <div class="stat-item">
+                <div class="stat-value" id="totalRows">0</div>
+                <div class="stat-label">Total Rows</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="totalAnomalies" style="color:var(--danger)">0</div>
+                <div class="stat-label">Anomalies Detected</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="maxZ">0.00</div>
+                <div class="stat-label">Max Z-Score</div>
+            </div>
+            <div class="stat-item" style="flex:2">
+                <div class="stat-value" id="affectedCols" style="font-size:1rem; text-align: left;">-</div>
+                <div class="stat-label" style="text-align: left;">Affected Columns</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" id="vizPanel" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2>3. Visualization</h2>
+            <select id="chartColSelect" style="width: auto; max-width: 200px;">
+                </select>
+        </div>
+        <p style="font-size:0.9rem; color:var(--text-light)">Red points indicate anomalies based on the selected column.</p>
+        <div id="chartContainer">
+            <canvas id="anomalyChart"></canvas>
+        </div>
+    </div>
+
+    <div class="card" id="tablePanel" style="display:none;">
+        <h2>4. Data Inspection</h2>
+        <div class="table-container">
+            <table id="dataTable">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- Global State ---
+    let rawData = [];
+    let processedData = []; // Contains original data + z-score metadata
+    let numericCols = [];
+    let chartInstance = null;
+
+    // --- DOM Elements ---
+    const fileInput = document.getElementById('csvFile');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+    const thresholdInput = document.getElementById('threshold');
+    const methodSelect = document.getElementById('method');
+    const filterMode = document.getElementById('filterMode');
+    const exportBtn = document.getElementById('exportBtn');
+    const chartColSelect = document.getElementById('chartColSelect');
+
+    const summaryPanel = document.getElementById('summaryPanel');
+    const tablePanel = document.getElementById('tablePanel');
+    const vizPanel = document.getElementById('vizPanel');
+
+    // --- Event Listeners ---
+    fileInput.addEventListener('change', handleFileUpload);
+    analyzeBtn.addEventListener('click', () => runAnalysis());
+    thresholdInput.addEventListener('change', () => runAnalysis());
+    methodSelect.addEventListener('change', () => runAnalysis());
+    filterMode.addEventListener('change', renderTable);
+    chartColSelect.addEventListener('change', updateChart);
+    exportBtn.addEventListener('click', exportAnomalies);
+
+    // --- 1. File Parsing ---
+    function handleFileUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        Papa.parse(file, {
+            header: true,
+            dynamicTyping: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+                rawData = results.data;
+                if (rawData.length === 0) {
+                    alert("CSV is empty or invalid.");
+                    return;
+                }
+                identifyNumericColumns();
+                analyzeBtn.disabled = false;
+                runAnalysis(); // Auto-run on load
+            },
+            error: function(err) {
+                alert("Error parsing CSV: " + err.message);
+            }
+        });
+    }
+
+    // --- 2. Identify Numeric Columns ---
+    function identifyNumericColumns() {
+        numericCols = [];
+        if (rawData.length === 0) return;
+
+        const keys = Object.keys(rawData[0]);
+        const sampleLimit = Math.min(rawData.length, 100);
+
+        keys.forEach(key => {
+            let isNumeric = true;
+            let hasData = false;
+            
+            for (let i = 0; i < sampleLimit; i++) {
+                const val = rawData[i][key];
+                if (val !== null && val !== "" && val !== undefined) {
+                    hasData = true;
+                    // Check if it parses to a number effectively
+                    if (isNaN(parseFloat(val)) || typeof val === 'string') { 
+                        // Note: dynamicTyping handles simple numbers, but strings like "$100" need care.
+                        // For simplicity, we assume dynamicTyping did its job or it's not a pure number column.
+                        if (typeof val !== 'number') isNumeric = false;
+                    }
+                }
+            }
+            if (isNumeric && hasData) numericCols.push(key);
+        });
+
+        // Populate Chart Dropdown
+        chartColSelect.innerHTML = '';
+        numericCols.forEach(col => {
+            const opt = document.createElement('option');
+            value = col;
+            opt.text = col;
+            chartColSelect.add(opt);
+        });
+    }
+
+    // --- 3. Analysis Logic (Z-Score & Stats) ---
+    function runAnalysis() {
+        if (!rawData.length || !numericCols.length) return;
+
+        const threshold = parseFloat(thresholdInput.value) || 3;
+        
+        // 1. Calculate Mean and StdDev for each numeric column
+        const stats = {};
+        numericCols.forEach(col => {
+            const values = rawData.map(row => {
+                const v = parseFloat(row[col]);
+                return isNaN(v) ? 0 : v;
+            });
+
+            const n = values.length;
+            const mean = values.reduce((a, b) => a + b, 0) / n;
+            const variance = values.reduce((a, b) => a + Math.pow(b - mean, 2), 0) / n;
+            const stdDev = Math.sqrt(variance);
+
+            stats[col] = { mean, stdDev };
+        });
+
+        // 2. Process Rows
+        processedData = rawData.map((row, index) => {
+            let isAnomaly = false;
+            let anomalyDetails = {};
+            let maxRowZ = 0;
+
+            numericCols.forEach(col => {
+                const val = parseFloat(row[col]);
+                if (isNaN(val)) return;
+
+                const { mean, stdDev } = stats[col];
+                let zScore = 0;
+                
+                if (stdDev !== 0) {
+                    zScore = (val - mean) / stdDev;
+                }
+
+                if (Math.abs(zScore) > maxRowZ) maxRowZ = Math.abs(zScore);
+
+                // Check Threshold
+                if (Math.abs(zScore) > threshold) {
+                    isAnomaly = true;
+                    anomalyDetails[col] = {
+                        val: val,
+                        z: zScore.toFixed(3),
+                        mean: mean.toFixed(2),
+                        std: stdDev.toFixed(2)
+                    };
+                }
+            });
+
+            return {
+                ...row,
+                _index: index + 1,
+                _isAnomaly: isAnomaly,
+                _details: anomalyDetails,
+                _maxZ: maxRowZ
+            };
+        });
+
+        updateSummary();
+        renderTable();
+        updateChart();
+
+        // Show panels
+        summaryPanel.style.display = 'block';
+        tablePanel.style.display = 'block';
+        vizPanel.style.display = 'block';
+    }
+
+    // --- 4. Summary Panel ---
+    function updateSummary() {
+        const totalRows = processedData.length;
+        const anomalies = processedData.filter(d => d._isAnomaly);
+        
+        // Find max Z-score across entire dataset
+        let globalMaxZ = 0;
+        processedData.forEach(row => {
+            if (row._maxZ > globalMaxZ) globalMaxZ = row._maxZ;
+        });
+
+        // Identify columns with anomalies
+        const badCols = new Set();
+        anomalies.forEach(row => {
+            Object.keys(row._details).forEach(col => badCols.add(col));
+        });
+
+        document.getElementById('totalRows').textContent = totalRows;
+        document.getElementById('totalAnomalies').textContent = anomalies.length;
+        document.getElementById('maxZ').textContent = globalMaxZ.toFixed(3);
+        
+        const colList = Array.from(badCols).join(', ');
+        document.getElementById('affectedCols').textContent = colList || "None";
+    }
+
+    // --- 5. Render Table ---
+    function renderTable() {
+        const table = document.getElementById('dataTable');
+        const thead = table.querySelector('thead');
+        const tbody = table.querySelector('tbody');
+        const mode = filterMode.value;
+
+        // Reset
+        thead.innerHTML = '';
+        tbody.innerHTML = '';
+
+        // Headers
+        const headerRow = document.createElement('tr');
+        // Add Index Column
+        const thIdx = document.createElement('th');
+        thIdx.textContent = '#';
+        headerRow.appendChild(thIdx);
+        
+        const columns = Object.keys(rawData[0]);
+        columns.forEach(col => {
+            const th = document.createElement('th');
+            th.textContent = col;
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        // Body
+        processedData.forEach(row => {
+            // Filter Logic
+            if (mode === 'anomalies' && !row._isAnomaly) return;
+            if (mode === 'normal' && row._isAnomaly) return;
+
+            const tr = document.createElement('tr');
+            if (row._isAnomaly) tr.classList.add('anomaly-row');
+
+            // Index Cell with Badge
+            const tdIdx = document.createElement('td');
+            tdIdx.innerHTML = `<b>${row._index}</b>`;
+            if (row._isAnomaly) {
+                tdIdx.innerHTML += `<span class="anomaly-badge">⚠ Anomaly</span>`;
+            }
+            tr.appendChild(tdIdx);
+
+            // Data Cells
+            columns.forEach(col => {
+                const td = document.createElement('td');
+                const val = row[col];
+                td.textContent = val;
+
+                // If this specific cell triggered the anomaly, highlight and add tooltip
+                if (row._isAnomaly && row._details[col]) {
+                    const d = row._details[col];
+                    td.classList.add('cell-anomaly');
+                    td.title = `Anomaly Detected!\nValue: ${d.val}\nZ-Score: ${d.z}\nMean: ${d.mean}\nStdDev: ${d.std}`;
+                }
+                tr.appendChild(td);
+            });
+
+            tbody.appendChild(tr);
+        });
+    }
+
+    // --- 6. Visualization (Chart.js) ---
+    function updateChart() {
+        const ctx = document.getElementById('anomalyChart').getContext('2d');
+        const targetCol = chartColSelect.value;
+        
+        if (!targetCol) return;
+
+        // Destroy old chart
+        if (chartInstance) chartInstance.destroy();
+
+        const normalPoints = [];
+        const anomalyPoints = [];
+
+        processedData.forEach(row => {
+            const val = row[targetCol];
+            const point = { x: row._index, y: val };
+            
+            // Check if THIS specific column is anomalous for this row
+            if (row._isAnomaly && row._details[targetCol]) {
+                anomalyPoints.push(point);
+            } else {
+                normalPoints.push(point);
+            }
+        });
+
+        chartInstance = new Chart(ctx, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    {
+                        label: 'Normal Data',
+                        data: normalPoints,
+                        backgroundColor: '#2563eb', // Blue
+                        pointRadius: 4
+                    },
+                    {
+                        label: 'Anomalies',
+                        data: anomalyPoints,
+                        backgroundColor: '#dc2626', // Red
+                        pointRadius: 6,
+                        pointStyle: 'triangle'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `Distribution of ${targetCol} (Row Index vs Value)`
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const pt = context.raw;
+                                return `Row ${pt.x}: ${pt.y}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: { display: true, text: 'Row Index' },
+                        type: 'linear',
+                        position: 'bottom'
+                    },
+                    y: {
+                        title: { display: true, text: targetCol }
+                    }
+                }
+            }
+        });
+    }
+
+    // --- 7. Export Function ---
+    function exportAnomalies() {
+        const anomalies = processedData.filter(d => d._isAnomaly);
+        if (anomalies.length === 0) {
+            alert("No anomalies to export.");
+            return;
+        }
+
+        // Clean internal keys (_index, _isAnomaly, etc) before exporting
+        const cleanData = anomalies.map(row => {
+            const newRow = { ...row };
+            delete newRow._index;
+            delete newRow._isAnomaly;
+            delete newRow._details;
+            delete newRow._maxZ;
+            return newRow;
+        });
+
+        const csv = Papa.unparse(cleanData);
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        
+        link.setAttribute("href", url);
+        link.setAttribute("download", "anomalies_only.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+</script>
+</body>
+</html>
